@@ -48,8 +48,10 @@ This is repository serves as documentation on learnings from watching the Plural
   * `!` Unsubscription point at which a subscription is unsubscribed
   * `a` Any character value being emitted by the producer
   * `()` Emit a single grouped value on same time frame
-  * `|` EMPTY is a single pipe that emits no items but terminates normally
-  * `-` NEVER is a single dash that emits no items and does not terminate
+  * `|` EMPTY is an Observable that emits no items but terminates normally
+    * Can be represented by a single pipe
+  * `-` NEVER is an Observable that emits no items and does not terminate
+    * Can be represented by a single dash or multiple dashes
 * Basic example:
 ```
 import { cold } from 'jasmine-marbles';
