@@ -53,7 +53,8 @@ This is repository serves as documentation on learnings from watching the Plural
   * `-` NEVER is an Observable that emits no items and does not terminate
     * Can be represented by a single dash or multiple dashes
 * Basic example:
-```
+
+```javascript
 import { cold } from 'jasmine-marbles';
 import { NEVER, EMPTY } from 'rxjs';
 
@@ -79,3 +80,54 @@ describe('Marble Syntax', () => {
   });
 });
 ```
+
+## Unit Testing with Hot and Cold Observables
+
+* Hot and Cold Observables
+  * Building blocks of RxJS
+    * Producer: Gets values and passes them to the observer
+    * Observable: Ties an observer to a producer
+    * Observer: Listens to producer
+  * Hot Observable
+    * Closes over the producer
+    * Start emitting values regardless of any subscription
+    * All subscribers get latest values
+    * Usually multicast
+    * Examples
+      * Tuning into a radio channel
+      * Cinema theater
+      * Mouse clicks
+      * Live movies / Netflix / etc.
+      * Stock tickers
+      * `src/hot-cold/hot.js`
+  * Cold Observable
+    * Creates and activates producer
+    * Start emitting values upon subscription
+    * Subscriber gets their copy of values
+    * Usually unicast
+      * One subscriber per producer
+    * RxJS observables
+      * `Of`, `from`, `interval` and `timer`
+    * Examples
+      * Watching downloaded movies
+      * Recorded podcast or song
+      * `src/hot-cold/cold.js`
+  * Testing Hot and Cold Observables
+    * `src/hot-cold/cold.spec.ts`
+    * `src/hot-cold/hot.spec.ts`
+    * Frame: Jasmine-marbles converts observable sequences into frames. A frame is JSON that consists of a RxJS notification object that wraps the actual delivered value with additional metadata and message type.
+```json
+{
+    "frame": 0,
+    "notification": {
+           "error": undefined | "error",
+           "kind": "N" | "C" | "E", // Next, complete, error
+           "hasValue": true | false,
+           "value": "a"
+    }
+}
+```
+
+## Unit Testing by Mocking Observable Values and Testing RxJS Operators
+
+
