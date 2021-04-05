@@ -1,5 +1,5 @@
 # Unit Testing RxJS with Marble Diagrams
-This is repository serves as documentation on learnings from watching the PluralSight course on this subject.
+This repository serves as documentation on learnings from watching the PluralSight course on Unit Testing RxJS with Marble Diagrams.
 
 ## Getting Started
 * Marble Testing allows us to write tests for asynchronous functionality in a synchronous and visual way
@@ -116,7 +116,7 @@ describe('Marble Syntax', () => {
     * `src/hot-cold/cold.spec.ts`
     * `src/hot-cold/hot.spec.ts`
     * Frame: Jasmine-marbles converts observable sequences into frames. A frame is JSON that consists of a RxJS notification object that wraps the actual delivered value with additional metadata and message type.
-```json
+```
 {
     "frame": 0,
     "notification": {
@@ -130,4 +130,13 @@ describe('Marble Syntax', () => {
 
 ## Unit Testing by Mocking Observable Values and Testing RxJS Operators
 
+* Code Example:
+  * `src/hot-cold/hot.spec.ts`
+  
+* Mocking Observables:
+  * The `cold('marbles', mock-object)` method can take two parameters 
+    * The first parameter is the marble diagram
+    * The second parameter is the mock object for emitted values
+  * Example: `cold('(x|)', { x: 'orange' })`
+  * Code Example: `src/hot-cold/mocking-observable-values.spec.ts`
 
