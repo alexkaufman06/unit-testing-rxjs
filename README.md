@@ -139,4 +139,9 @@ describe('Marble Syntax', () => {
     * The second parameter is the mock object for emitted values
   * Example: `cold('(x|)', { x: 'orange' })`
   * Code Example: `src/hot-cold/mocking-observable-values.spec.ts`
+  
+* Concat Operator:
+  * Subscribes to observables in order as previous completes
+  * Like an ATM, the next transaction (subscription) cannot start until the previous completes
+  * Can be used to make sure you fetch data before displaying a component/page
 

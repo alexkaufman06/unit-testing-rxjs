@@ -2,25 +2,47 @@ import { hot, cold } from 'jasmine-marbles';
 import { concat } from 'rxjs/operators';
 
 describe('concat', () => {
-  it('should concat cold observables', () => {});
+  it('should concat cold  2 observables', () => {
+    const $obs1 = cold('---a---b|');
+    const sub1 =               '^-------!';
+    const $obs2 = cold('---c---d|');
+    const sub2 =               '--------^-------!'
+    const $result = $obs1.pipe(concat($obs2));
+    const $expected = cold('---a---b---c---d|');
 
-  describe('should identify subscription points in cold observable', () => {
-    let obs1, sub1, obs2, sub2, expected, result;
-    beforeEach(() => {
-      obs1 = cold('    ---a---b|');
-      sub1 = '         ^-------!';
-      obs2 = cold('             ---c---d|');
-      sub2 = '         --------^--------!';
-      expected = cold('---a---b---c---d|');
-      result = obs1.pipe(concat(obs2));
-    });
-
-    it('should match result', () => {});
-
-    it('should identify first subscription', () => {});
-
-    it('should identify 2nd subscription', () => {});
+    expect($result).toBeObservable($expected);
+    expect($obs1).toHaveSubscriptions(sub1);
+    expect($obs2).toHaveSubscriptions(sub2);
   });
 
-  it('should concat hot observables', () => {});
+  xit('serving pizza to customer', () => {
+    const status = {
+      orderCreated: 'Order placed',
+      paymentReceived: '$ received',
+      orderReady: 'Pizza is ready',
+      orderShipped: 'Pizza is on the way!!!'
+    }
+    const $orderCreated = cold('--c--|', { c: status.orderCreated });
+    const $paymentReceived = cold('---p|', { c: status.paymentReceived });
+    const $orderReady = cold('-r-|', { c: status.orderReady });
+    const $orderShipped = cold('---s--|', { c: status.orderShipped });
+    const $result = servePizza(
+        $orderCreated,
+        $paymentReceived,
+        $orderReady,
+        $orderShipped
+    );
+    const $expected = cold('--c-----p-r----s--|', {
+      c: status.orderCreated,
+      p: status.paymentReceived,
+      r: status.orderReady,
+      s: status.orderShipped
+    });
+
+    expect($result).toBeObservable($expected);
+  });
 });
+
+function servePizza($sale, $payment, $kitchen, $shipOrReadyForPickup) {
+  return $sale.pipe(concat($payment, $kitchen, $shipOrReadyForPickup));
+}
