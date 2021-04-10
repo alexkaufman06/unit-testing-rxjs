@@ -16,6 +16,7 @@ describe('concat', () => {
   });
 
   xit('serving pizza to customer', () => {
+    // TODO: FIGURE OUT WHY THIS ISN'T WORKING AND MAYBE SWITCH CONCAT TO SOMETHING ELSE
     const status = {
       orderCreated: 'Order placed',
       paymentReceived: '$ received',

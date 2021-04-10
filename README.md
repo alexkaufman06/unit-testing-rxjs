@@ -6,7 +6,7 @@ This repository serves as documentation on learnings from watching the PluralSig
 * Challenges with Observable testing
   * How to test Observables synchronously
   * How to make Observable stream predictable
-  * Hot wo mock Observable emitted values
+  * How to mock Observable emitted values
   * Answers: Marble testing
 * RxJS: Reactive Extension for JavaScript. It is a library for reactive programming using observables that makes it
   easier to compose asynchronous code.
@@ -144,4 +144,11 @@ describe('Marble Syntax', () => {
   * Subscribes to observables in order as previous completes
   * Like an ATM, the next transaction (subscription) cannot start until the previous completes
   * Can be used to make sure you fetch data before displaying a component/page
+  * Code Example: `src/rxjs-operators/3-concat.spec.ts`
+  
+* Zip Operator:
+  * Combine the emissions of multiple Observables together via a specified function and emit single items for each 
+    combination based on the results of this function
+  * Real world could be to draw a line with mouse event x/y coordinates
+  * Code Example: `src/rxjs-operators/4-zip.spec.ts`
 
