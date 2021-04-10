@@ -152,3 +152,24 @@ describe('Marble Syntax', () => {
   * Real world could be to draw a line with mouse event x/y coordinates
   * Code Example: `src/rxjs-operators/4-zip.spec.ts`
 
+## Unit Testing RxJS with Marble Diagrams
+
+* Test Scheduler:
+  * Scheduler is a primitive inside RxJS
+  * RxJS Operators takes scheduler as the second optional parameter
+    * Ex: `Interval(40, async)`
+  * RxJS 6 has build in schedulers
+  * TestScheduler works with virtual time
+  * Code Example: `src/app/dashboard/dashboard.component.spec.ts`
+  
+* SwitchMap Operator:
+  * Cancels previous request when next request is received so you always get the latest result
+  * Code Example: `src/app/dashboard/dashboard.component.spec.ts`
+  
+* DebounceTime Operator:
+  * Emits a value from the source Observable only after a particular time span has passed without another source emission.
+  * Code Example: `src/app/dashboad.component.spec.ts`
+  
+* Error Handling:
+  * Code Example: `src/errors-syntaxes/errors.spec.ts`
+
